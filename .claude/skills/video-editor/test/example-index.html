@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      :root { --orange: #FF5A1F; --navy: #0B1F3A; --ink: #FFFFFF; --font: "Montserrat"; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--navy); }
+      #root { position: relative; width: 100%; height: 100%; font-family: var(--font); overflow: hidden; }
+      #bg { position: absolute; inset: 0; background: radial-gradient(120% 80% at 50% 30%, #17345E 0%, var(--navy) 65%); }
+      .blob { position: absolute; border-radius: 50%; background: var(--orange); opacity: 0.18; }
+      #b1 { width: 620px; height: 620px; left: -180px; top: 240px; }
+      #b2 { width: 420px; height: 420px; right: -120px; top: 820px; opacity: 0.12; }
+      #badge { position: absolute; left: 0; right: 0; top: 220px; text-align: center; }
+      #badge span { display: inline-block; padding: 18px 38px; border-radius: 999px; border: 4px solid var(--orange);
+                    color: var(--ink); font-weight: 800; font-size: 44px; letter-spacing: 0.08em; }
+      #frame { position: absolute; left: 140px; right: 140px; top: 420px; height: 640px; border-radius: 48px;
+               background: linear-gradient(160deg, rgba(255,90,31,0.35), rgba(255,255,255,0.04)); border: 3px solid rgba(255,255,255,0.12); }
+      #frame p { position: absolute; left: 0; right: 0; top: 270px; text-align: center; color: rgba(255,255,255,0.55);
+                 font-weight: 600; font-size: 40px; }
+      .cap { position: absolute; left: 0; right: 0; bottom: 640px; text-align: center; overflow: visible; opacity: 0; }
+      .pill { display: inline-block; max-width: 900px; padding: 22px 36px; border-radius: 28px; background: rgba(11,31,58,0.88);
+              color: var(--ink); font-weight: 800; font-size: 72px; line-height: 1.15; white-space: nowrap; text-transform: uppercase; }
+      .w { display: inline-block; margin: 0 0.06em; transform-origin: 50% 60%; }
+      #cta { position: absolute; left: 0; right: 0; bottom: 620px; text-align: center; opacity: 0; }
+      #cta span { display: inline-block; padding: 28px 56px; border-radius: 999px; background: var(--orange); color: var(--ink);
+                  font-weight: 800; font-size: 72px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-variables='[{"id":"brand","type":"string","label":"Brand name","default":"YOUR BRAND"},{"id":"cta","type":"string","label":"Call to action","default":"Follow for more"}]' data-composition-id="main" data-start="0" data-duration="7.3" data-width="1080" data-height="1920">
+      <div id="bgwrap" class="clip" data-start="0" data-duration="7.3" data-track-index="0">
+        <div id="bg"></div><div class="blob" id="b1"></div><div class="blob" id="b2"></div>
+      </div>
+      <div id="badgewrap" class="clip" data-start="0" data-duration="7.3" data-track-index="1">
+        <div id="badge"><span data-var-text="brand">YOUR BRAND</span></div>
+        <div id="frame"><p>your footage here</p></div>
+      </div>
+      <div id="captions" class="clip" data-start="0" data-duration="7.3" data-track-index="2" data-track-kind="captions">
+        <div class="cap" id="g0"><div class="pill"><span class="w" id="g0w0">Hey,</span></div></div>
+        <div class="cap" id="g1"><div class="pill"><span class="w" id="g1w0">I&#x27;m</span> <span class="w" id="g1w1">your</span> <span class="w" id="g1w2">new</span></div></div>
+        <div class="cap" id="g2"><div class="pill"><span class="w" id="g2w0">video</span> <span class="w" id="g2w1">editor.</span></div></div>
+        <div class="cap" id="g3"><div class="pill"><span class="w" id="g3w0">I</span> <span class="w" id="g3w1">cut</span> <span class="w" id="g3w2">the</span></div></div>
+        <div class="cap" id="g4"><div class="pill"><span class="w" id="g4w0">retakes,</span></div></div>
+        <div class="cap" id="g5"><div class="pill"><span class="w" id="g5w0">add</span> <span class="w" id="g5w1">your</span> <span class="w" id="g5w2">captions</span></div></div>
+        <div class="cap" id="g6"><div class="pill"><span class="w" id="g6w0">and</span> <span class="w" id="g6w1">keep</span> <span class="w" id="g6w2">it</span></div></div>
+        <div class="cap" id="g7"><div class="pill"><span class="w" id="g7w0">on</span> <span class="w" id="g7w1">brand.</span></div></div>
+      </div>
+      <div id="ctawrap" class="clip" data-start="5.150" data-duration="2.150" data-track-index="3">
+        <div id="cta"><span data-var-text="cta">Follow for more</span></div>
+      </div>
+      <audio id="voice" class="clip" src="assets/voice.wav" data-start="0.3" data-duration="5.333" data-track-index="4"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#b1", { x: 0, y: 0 }, { x: 120, y: 90, duration: 7.3, ease: "sine.inOut" }, 0);
+      tl.fromTo("#b2", { x: 0, y: 0 }, { x: -90, y: -140, duration: 7.3, ease: "sine.inOut" }, 0);
+      tl.fromTo("#badge", { y: -12 }, { y: 0, duration: 0.4, ease: "power3.out" }, 0);
+      tl.fromTo("#frame", { scale: 0.97 }, { scale: 1, duration: 0.6, ease: "power3.out" }, 0);
+      tl.to("#g0w0", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 0.300);
+      tl.to("#g0w0", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 0.520);
+      tl.fromTo("#g0", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.14, ease: "power3.out" }, 0.250);
+      tl.to("#g0", { opacity: 0, duration: 0.1, ease: "power2.in" }, 0.510);
+      tl.set("#g0", { opacity: 0, visibility: "hidden" }, 0.610);
+      tl.to("#g1w0", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 0.660);
+      tl.to("#g1w0", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 0.800);
+      tl.to("#g1w1", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 0.800);
+      tl.to("#g1w1", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 0.920);
+      tl.to("#g1w2", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 0.920);
+      tl.to("#g1w2", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 1.100);
+      tl.fromTo("#g1", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.14, ease: "power3.out" }, 0.610);
+      tl.to("#g1", { opacity: 0, duration: 0.1, ease: "power2.in" }, 0.950);
+      tl.set("#g1", { opacity: 0, visibility: "hidden" }, 1.050);
+      tl.to("#g2w0", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 1.100);
+      tl.to("#g2w0", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 1.340);
+      tl.to("#g2w1", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 1.340);
+      tl.to("#g2w1", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 1.760);
+      tl.fromTo("#g2", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.14, ease: "power3.out" }, 1.050);
+      tl.to("#g2", { opacity: 0, duration: 0.1, ease: "power2.in" }, 1.810);
+      tl.set("#g2", { opacity: 0, visibility: "hidden" }, 1.910);
+      tl.to("#g3w0", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 2.160);
+      tl.to("#g3w0", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 2.260);
+      tl.to("#g3w1", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 2.200);
+      tl.to("#g3w1", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 2.400);
+      tl.to("#g3w2", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 2.400);
+      tl.to("#g3w2", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 2.540);
+      tl.fromTo("#g3", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.14, ease: "power3.out" }, 2.110);
+      tl.to("#g3", { opacity: 0, duration: 0.1, ease: "power2.in" }, 2.390);
+      tl.set("#g3", { opacity: 0, visibility: "hidden" }, 2.490);
+      tl.to("#g4w0", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 2.540);
+      tl.to("#g4w0", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 3.020);
+      tl.fromTo("#g4", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.14, ease: "power3.out" }, 2.490);
+      tl.to("#g4", { opacity: 0, duration: 0.1, ease: "power2.in" }, 3.070);
+      tl.set("#g4", { opacity: 0, visibility: "hidden" }, 3.170);
+      tl.to("#g5w0", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 3.320);
+      tl.to("#g5w0", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 3.420);
+      tl.to("#g5w1", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 3.340);
+      tl.to("#g5w1", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 3.500);
+      tl.to("#g5w2", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 3.500);
+      tl.to("#g5w2", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 4.000);
+      tl.fromTo("#g5", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.14, ease: "power3.out" }, 3.270);
+      tl.to("#g5", { opacity: 0, duration: 0.1, ease: "power2.in" }, 3.850);
+      tl.set("#g5", { opacity: 0, visibility: "hidden" }, 3.950);
+      tl.to("#g6w0", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 4.000);
+      tl.to("#g6w0", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 4.180);
+      tl.to("#g6w1", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 4.180);
+      tl.to("#g6w1", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 4.360);
+      tl.to("#g6w2", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 4.360);
+      tl.to("#g6w2", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 4.520);
+      tl.fromTo("#g6", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.14, ease: "power3.out" }, 3.950);
+      tl.to("#g6", { opacity: 0, duration: 0.1, ease: "power2.in" }, 4.370);
+      tl.set("#g6", { opacity: 0, visibility: "hidden" }, 4.470);
+      tl.to("#g7w0", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 4.520);
+      tl.to("#g7w0", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 4.640);
+      tl.to("#g7w1", { color: "#FF5A1F", scale: 1.05, duration: 0.08, ease: "power2.out" }, 4.640);
+      tl.to("#g7w1", { color: "#FFFFFF", scale: 1, duration: 0.08, ease: "power2.in" }, 5.000);
+      tl.fromTo("#g7", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.14, ease: "power3.out" }, 4.470);
+      tl.to("#g7", { opacity: 0, duration: 0.1, ease: "power2.in" }, 5.050);
+      tl.set("#g7", { opacity: 0, visibility: "hidden" }, 5.150);
+      tl.fromTo("#cta", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 5.150);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
